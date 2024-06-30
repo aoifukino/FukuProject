@@ -15,10 +15,10 @@ class TaxIn(BaseModel):
 app = FastAPI()
 
 # getメソッドで、/にアクセスした時の処理を記述
-@app.get("/")
+@app.get("/{prompt_text}")
 # asyncで*非同期処理を行う
 # *あるタスクを実行している最中に、実行中のタスクを止めることなく、別のタスクを実行できる
-async def hello():
+async def hello(prompt_text: str):
      # Set the system prompt
 	system_prompt = {
 	"role": "system",
@@ -26,7 +26,7 @@ async def hello():
 	}
 
 	# Set the user prompt
-	user_input = "面接のコツを教えてください。"
+	user_input = prompt_text
 	user_prompt = {
 	"role": "user", "content": user_input
 	}
