@@ -38,16 +38,3 @@ async def hello(prompt_text: str):
 
 
 	return {"text": f"{response.choices[0].message.content}"}
-
-# getメソッドで、/TaxEx/{price}にアクセスした時の処理を記述
-@app.post("/TaxEx/{price}")
-async def TaxEx(price: int, item: str = None):
-    if item:
-        return {"text": f"{item}は{price}円"}
-    return {"text": f"何かが{price}円"}
-
-# postメソッドで、/にアクセスした時の処理を記述
-@app.post("/TaxIn")
-async def TaxIn(data: TaxIn):
-    in_tax_cost = math.ceil(data.price * (1 + data.tax_rate))
-    return {"text": f"{data.item}は{in_tax_cost}円(税込み)"}
